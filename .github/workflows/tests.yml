@@ -13,6 +13,9 @@ jobs:
 
       - name: Install Hurl
         run: |
+          sudo apt-get update
+          curl -fsSL https://apt.akeeba.com/akeeba-apt.gpg | sudo tee /etc/apt/trusted.gpg.d/akeeba.asc >/dev/null
+          echo "deb [signed-by=/etc/apt/trusted.gpg.d/akeeba.asc] https://apt.akeeba.com stable main" | sudo tee /etc/apt/sources.list.d/akeeba.list
           sudo apt-get update && sudo apt-get install -y hurl
 
       - name: Run Tests
