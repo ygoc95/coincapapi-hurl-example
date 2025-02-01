@@ -12,9 +12,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install Hurl
-        run: |
-          docker run --rm -v $(pwd):/tests ghcr.io/orange-opensource/hurl:6.0.0 \
-          /usr/local/bin/hurl --variables-file /tests/vars.env --test /tests/tests --report-html /tests/hurl-report
+        run: docker build -t my-hurl-runner .
+
+      - name: Run Hurl Tests Inside Docker
+        run: docker run --rm -v $(pwd):/tests my-hurl-runner
 
       - name: Upload HTML Report
         uses: actions/upload-artifact@v4
