@@ -15,7 +15,7 @@ jobs:
         run: docker build -t my-hurl-runner .
 
       - name: Run Hurl Tests Inside Docker
-        run: docker run --rm -v $(pwd):/tests my-hurl-runner
+        run: docker run --rm -v $(pwd):/tests my-hurl-runner ls -la /tests
 
       - name: Upload HTML Report
         uses: actions/upload-artifact@v4
