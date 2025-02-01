@@ -1,0 +1,27 @@
+name: Hurl Tests
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Hurl
+        run: |
+          sudo apt-get update && sudo apt-get install -y hurl
+
+      - name: Run Tests
+        run: |
+          hurl --variables-file .\vars.env --test .\tests hurl-report
+
+      - name: Upload HTML Report as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: hurl-html-report
+          path: hurl-report
+          retention-days: 7
