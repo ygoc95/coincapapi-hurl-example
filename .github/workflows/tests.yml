@@ -13,11 +13,7 @@ jobs:
 
       - name: Install Hurl
         run: |
-          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-          echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.bashrc
-          eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-          echo "Homebrew installed at $(which brew)"
-          brew install hurl
+          docker run --rm -v $(pwd):/tests ghcr.io/orange-opensource/hurl:6.0.0 \
 
       - name: Run Tests
         run: |
